@@ -41,6 +41,22 @@ sellAndBuyRouter.get("/sellProduct", (req, res) => {
         });
 });
 
+sellAndBuyRouter.post("/sellProduct", (req, res) => {
+    if (req.body.productName.length < 4) {
+        res.status(400).json({ error: "product name should have minimum of four characters" });
+    }
+    else if (req.body.costPrice < 1) {
+        res.status(400).json({ error: "cost price value cannot be zero or negative value" });
+    }
+    else {
+        const data = new SellBuy(
+            { productName: req.body.productName, costPrice: req.body.costPrice }
+        )
+        data.save().then((result) => { res.status(201).json({ message: "Product Added" }); })
+            .catch((err) => { res.status(400).json({ err }); })
+    }
+})
+
 // exporting the router
 
 module.exports = sellAndBuyRouter;
