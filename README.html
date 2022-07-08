@@ -1,0 +1,208 @@
+<html>
+
+<head>
+	<title>
+		Problem Statement - Sell And Buy Product
+	</title>
+	<style>
+		li {
+			margin: 5px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h2><span style="color:#27ae60;">Kickoffs - NodeJS - Sell And Buy Product</span></h2>
+
+	<p></p>
+
+	<p><span style="color:#000000;">Build an application for the shop, where the shopkeeper can maintain the list of product &nbsp;</span><span
+			style="color:#8e44ad;"><strong>bought</strong> </span><span style="color:#000000;">and </span><span
+			style="color:#8e44ad;"><strong>sold</strong></span></p>
+
+	<ul>
+		<li><span style="font-size:16px;"><span style="color:#8e44ad;"><strong>SellAndBuy</strong> </span><span
+					style="color:#000000;">is the&nbsp;name of the database used in this application.</span></span></li>
+		<li><span style="font-size:16px;"><span style="color:#000000;">A collection of named </span><span
+					style="color:#8e44ad;"><strong>sellbuys </strong></span><span style="color:#000000;">present in the
+					database.</span></span></li>
+	</ul>
+
+	<h3><span style="color:#16a085;">COLLECTIONS :&nbsp;</span></h3>
+
+	<p><span style="color:#000000;">There is a single file for collection
+			namely&nbsp;<strong>sellBuy.js</strong>&nbsp;that reside inside&nbsp;<strong>src/mongoose/models</strong>. The
+			schema of the collection is given as follows.</span></p>
+
+	<table border="1" cellpadding="1" cellspacing="1" style="width:800px;text-align: center;">
+		<thead>
+			<tr>
+				<th scope="row"><span style="color:#000000;"><strong>SI.No</strong></span></th>
+				<th scope="col">
+					<p><span style="color:#000000;"><strong>Field Name</strong></span></p>
+				</th>
+				<th scope="col"><span style="color:#000000;"><strong>Type</strong></span></th>
+				<th scope="col"><span style="color:#000000;"><strong>Validations</strong></span></th>
+				<th scope="col"><span style="color:#000000;"><strong>Required</strong></span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span style="color:#000000;">1</span></td>
+				<td><span style="color:#000000;">_id</span></td>
+				<td><span style="color:#000000;">ObjectID</span></td>
+				<td><span style="color:#000000;">Auto-generated</span></td>
+				<td><span style="color:#000000;">-</span></td>
+			</tr>
+			<tr>
+				<td><span style="color:#000000;">2</span></td>
+				<td><span style="color:#000000;">productName</span></td>
+				<td><span style="color:#000000;">String</span></td>
+				<td><span style="color:#000000;">Product name should have minimum of four characters</span></td>
+				<td><span style="color:#000000;">TRUE</span></td>
+			</tr>
+			<tr>
+				<td><span style="color:#000000;">3</span></td>
+				<td><span style="color:#000000;">costPrice</span></td>
+				<td><span style="color:#000000;">Number</span></td>
+				<td><span style="color:#000000;">cost price value cannot be zero or negative value</span></td>
+				<td><span style="color:#000000;">TRUE</span></td>
+			</tr>
+			<tr>
+				<td><span style="color:#000000;">4</span></td>
+				<td><span style="color:#000000;">soldPrice</span></td>
+				<td><span style="color:#000000;">Number</span></td>
+				<td><span style="color:#000000;">sold price value cannot be zero or negative value</span></td>
+				<td><span style="color:#000000;">-</span></td>
+			</tr>
+			<tr>
+				<td><span style="color:#000000;">5</span></td>
+				<td><span style="color:#000000;">_v</span></td>
+				<td><span style="color:#000000;">Number</span></td>
+				<td><span style="color:#000000;">Auto-generated</span></td>
+				<td><span style="color:#000000;">-</span></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<p><span style="color:#000000;">You should create the model as details mentioned above</span></p>
+
+	<h3><span style="color:#16a085;">ROUTERS&nbsp;:</span></h3>
+
+	<p><span style="color:#000000;">There is a single file for routers namely&nbsp;<strong>sellAndBuy.js</strong>&nbsp;that
+			reside inside&nbsp;<strong>src/routers</strong>. The endpoints and their functionalities are as follows.</span>
+	</p>
+
+	<!-- POST Request -->
+	<p><span style="color:#0E1C6F; font-size:20"><strong>1)&nbsp;/sellProduct&nbsp;-&gt; GET Method -&gt;</strong>&nbsp;</span><span style="color:#000000;">This route should fetch all the data from the
+			the&nbsp;<strong>sellbuys</strong>&nbsp;collection. If any query is passed , then the data should be fetched based on that.</span></p>
+	<p><Strong><span style="color:#16a085;">Sample Request</span></Strong></p>
+	<ul>
+		<li><Strong>/sellProduct</Strong> - should return all data</li>
+		<li><Strong>/sellProduct?product="Laptop"</Strong> - should return the data which has productName as "Laptop". Here the product name can differ.</li>
+		<li><Strong>/sellProduct?sortBy="lowerCostPrice"</Strong> - should sort the data from lower to higher cost price of the product.</li>
+		<li><Strong>/sellProduct?sortBy="higherCostPrice"</Strong> - should sort the data from higher to lower cost price of the product.</li>
+		<li><Strong>/sellProduct?sortBy="lowerSoldPrice"</Strong> - should sort the data from lower to higher sold price of the product.</li>
+		<li><Strong>/sellProduct?sortBy="higherSoldPrice"</Strong> - should sort the data from higher to lower sold price of the product</li>
+	</ul>
+	<p><strong><span style="color:#16a085;">Sample Response Data</span></strong></p>
+
+	<pre>
+<code class="language-json">
+[
+    {
+        "_id": "61b846aee947043c2c22820d",
+        "productName": "Table",
+        "costPrice": 3000,
+        "__v": 0
+    },
+    {
+        "_id": "61b846aee947043c2c22820b",
+        "productName": "Mobile",
+        "costPrice": 4500,
+        "soldPrice": 4000,
+        "__v": 0
+    },
+]
+</code></pre>
+
+<li><span style="color:#000000;font-size:16px;">If the data is fetched successfully from the database, then you
+	should send a response code of 200</span></li>
+<li><span style="color:#000000;font-size:16px;">If something went wrong and the data is not fetched successfully
+	from the database, then you should send a response code of 400</span></li>
+
+	<!-- GET Request -->
+<p><span style="color:#0E1C6F; font-size:20"><strong>2)&nbsp;/sellProduct</strong><strong>&nbsp;-&gt; POST Method
+			-&gt;</strong>&nbsp;</span><span style="color:#000000;">This route should save the data sent with the request body in
+			the&nbsp;<strong>sellbuys</strong>&nbsp;collection.</span></p>
+<p><strong><span style="color:#16a085;">Sample data send with the request:</span></strong></p>
+
+		<pre>
+		<code class="language-json">
+		{
+			productName:"Table",
+			costPrice:1000
+		}</code></pre>
+
+<ul>
+	<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;You should save the data sent in the request body to the
+		sellbuys collection as separate records or documents</span></li>
+	<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;If the insertion was successful, then you should send a
+			response code of&nbsp;<strong>201</strong> along with a message "Product Added" should be sent.</span></li>
+	<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;If some data validations failed and the data is not
+			inserted into the collection then you should send a response code of&nbsp;<strong>400.</strong></span></li>
+			<li>Error message should be sent along with response code of 400, as <Strong>"product name should have minimum of four characters"</Strong> when the <Strong>product name</Strong> sent in request body has <Strong>less than four characters</Strong></li>
+			<li>Error message should be sent along with response code of 400, as <Strong>"cost price value cannot be zero or negative value"</Strong> when the <Strong>cost price</Strong> sent in request body has <Strong>zero or negative</Strong> value.</li>
+</ul>
+
+<p><span style="color:#0E1C6F; font-size:20"><strong>3)&nbsp;/sellProduct:id</strong><strong>&nbsp;-&gt; PATCH Method
+	-&gt;</strong>&nbsp;</span><span style="color:#000000;">This route should find and update the data sent with the request body in
+	the&nbsp;<strong>sellbuys</strong>&nbsp;collection.</span></p>
+<p><strong><span style="color:#16a085;">Sample data send with the request:</span></strong></p>
+	<pre><code class="language-json">	{
+	soldPrice:1000
+	}</code></pre>
+
+<ul>
+<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;You should update the data sent in the request body to the
+	to the record in the sellbuys collection which match the id param</span></li>
+<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;If the updation was successful, then you should send a
+	response code of&nbsp;<strong>200</strong> along with a message "Updated Successfully" should be sent.</span></li>
+<li><span style="font-size:16px;">&nbsp;&nbsp;&nbsp;&nbsp;If some data validations failed and the data is not
+	inserted into the collection then you should send a response code of&nbsp;<strong>400.</strong></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;Error message should be sent as <strong>"sold price value cannot be zero or negative value"</strong> when the <strong>sold price</strong> sent in request body has <strong>zero or negative value</strong>.</li>
+</ul>
+
+
+<p><span style="color:#0E1C6F; font-size:20"><strong>4)&nbsp;/sellProduct:id</strong><strong>&nbsp;-&gt; DELETE Method
+			-&gt;</strong></span>&nbsp;<span style="color:#000000;">Finds the report by the id passed through url parameter and deletes it.</span></p>
+		
+	<ul>
+		<li>You should delete the data present in the sellbuys collection</li>
+		<li>If the deletion was successful, then you should send a response code of <strong>200</strong> along with a message <strong>"Deleted successfully"</strong> .</li>
+		<li>If something went wrong and the data is not deleted successfully from the database, then you should send a
+			response code of <strong>400</strong>.</li>
+	</ul>
+
+	<p><span style="color:#8e44ad;"><span style="font-size:20px;"><strong>Instructions To Note:</strong></span></span></p>
+
+	<ul>
+		<li>If you want to install project(NodeJS) dependecies, run <strong><i>install.sh</i></strong> in terminal </li>
+		<li>If you want to run your application, run <strong><i>run.sh</i></strong> in terminal (you can also view your application with UI on port 8001 in the browser)</li>
+		<li>To run test cases, run <strong><i>test.sh</i></strong> in terminal 
+	</ul>
+	<p><span style="color:#8e44ad;"><span style="font-size:20px;"><strong>MongoDB Commands:</strong></span></span></p>
+
+	<ul>
+		<li>You can open the mongo shell by running mongo from the terminal. </li>
+		<li>You can view all the data from the database in MongoDB by running <strong>show dbs</strong> from the mongo shell. </li>
+		<li>You can select the database by running <strong>use SellAndBuy</strong>.</li>
+		<li>You can view the names of the collections by running <strong>show collections</strong>.</li>
+		<li>You can view the data inside a collection by running <strong>db.sellbuys.find() </strong></li>
+		<li>Press <strong>ctrl+c</strong> to exit.</li>
+	</ul>
+
+</body>
+
+</html>
