@@ -57,6 +57,21 @@ sellAndBuyRouter.post("/sellProduct", (req, res) => {
     }
 })
 
+sellAndBuyRouter.patch("/sellProduct/:id", (req, res) => {
+    if (req.body.soldPrice < 1) {
+        res.status(400).json({ error: "sold price value cannot be zero or negative value" });
+    }
+    else {
+        SellBuy.findByIdAndUpdate(req.params.id, req.body, { new: true })
+            .then((data) => {
+                res.status(200).json({ message: "Updated Successfully" });
+            })
+            .catch((err) => {
+                res.status(400).json({ message: err.message });
+            });
+    }
+});
+
 // exporting the router
 
 module.exports = sellAndBuyRouter;
